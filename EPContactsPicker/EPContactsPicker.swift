@@ -9,18 +9,17 @@
 import UIKit
 import Contacts
 
-@objc protocol EPPickerDelegate{
+@objc protocol EPPickerDelegate {
     
     optional    func epContactPicker(_: EPContactsPicker, didContactFetchFailed error : NSError)
     optional    func epContactPicker(_: EPContactsPicker, didCancel error : NSError)
     optional    func epContactPicker(_: EPContactsPicker, didSelectContact contact : EPContact)
     optional    func epContactPicker(_: EPContactsPicker, didSelectMultipleContacts contacts : [EPContact])
-    
 }
 
 typealias ContactsHandler = (contacts : [CNContact] , error : NSError?)  -> Void
 
-enum SubtitleCellValue{
+enum SubtitleCellValue {
     case Phonenumber
     case Email
     case Birthday
@@ -72,9 +71,7 @@ class EPContactsPicker: UITableViewController {
         if multiSelectEnabled {
             let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "onTouchDoneButton")
             self.navigationItem.rightBarButtonItem = doneButton
-            
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
