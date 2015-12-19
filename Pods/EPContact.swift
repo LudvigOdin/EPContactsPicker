@@ -9,10 +9,7 @@
 import UIKit
 import Contacts
 
-
-
-
-public class EPContact: NSObject {
+class EPContact: NSObject {
     
     var firstName : NSString!
     var lastName : NSString!
@@ -25,8 +22,7 @@ public class EPContact: NSObject {
     var phoneNumbers = [(phoneNumber: String ,phoneLabel: String )]()
     var emails = [(email: String ,emailLabel: String )]()
     
-    init (contact: CNContact)
-    {
+    init (contact: CNContact) {
         super.init()
         
         //VERY IMPORTANT: Make sure you have all the keys accessed below in the fetch request
@@ -36,13 +32,11 @@ public class EPContact: NSObject {
         contactId = contact.identifier
         
         //If lets are used becasue there are chances that we would be accessing nil objects
-        if let thumbnailImageData = contact.thumbnailImageData
-        {
+        if let thumbnailImageData = contact.thumbnailImageData {
             thumbnailProfileImage = UIImage(data:thumbnailImageData)
         }
         
-        if let imageData = contact.imageData
-        {
+        if let imageData = contact.imageData {
             profileImage = UIImage(data:imageData)
         }
         
@@ -59,13 +53,11 @@ public class EPContact: NSObject {
             let phone = phoneNumber.value as! CNPhoneNumber
             phoneNumbers.append((phone.stringValue,phoneNumber.label))
         }
-
+        
         for emailAddress in contact.emailAddresses {
             let email = emailAddress.value as! String
             emails.append((email,emailAddress.label))
         }
-
-    
     }
     
     func displayName() -> String {

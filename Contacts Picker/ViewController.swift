@@ -25,22 +25,18 @@ class ViewController: UIViewController, EPPickerDelegate {
     let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:true, subtitleCellType: SubtitleCellValue.Email)
     let navigationController = UINavigationController(rootViewController: contactPickerScene)
     self.presentViewController(navigationController, animated: true, completion: nil)
-    
   }
     
 //MARK: EPContactsPicker delegates
-    func epContactPicker(_: EPContactsPicker, didContactFetchFailed error : NSError)
-    {
+    func epContactPicker(_: EPContactsPicker, didContactFetchFailed error : NSError) {
         print("Failed with error \(error.description)")
     }
     
-    func epContactPicker(_: EPContactsPicker, didSelectContact contact : EPContact)
-    {
+    func epContactPicker(_: EPContactsPicker, didSelectContact contact : EPContact) {
         print("Contact \(contact.displayName()) has been selected")
     }
     
-    func epContactPicker(_: EPContactsPicker, didCancel error : NSError)
-    {
+    func epContactPicker(_: EPContactsPicker, didCancel error : NSError) {
         print("User canceled the selection");
     }
     
@@ -50,5 +46,4 @@ class ViewController: UIViewController, EPPickerDelegate {
             print("\(contact.displayName())")
         }
     }
-
 }

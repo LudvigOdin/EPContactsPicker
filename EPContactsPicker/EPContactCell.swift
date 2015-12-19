@@ -9,7 +9,7 @@
 import UIKit
 
 class EPContactCell: UITableViewCell {
-
+    
     @IBOutlet weak var contactTextLabel: UILabel!
     @IBOutlet weak var contactDetailTextLabel: UILabel!
     @IBOutlet weak var contactImageView: UIImageView!
@@ -23,10 +23,9 @@ class EPContactCell: UITableViewCell {
         contactContainerView.layer.masksToBounds = true
         contactContainerView.layer.cornerRadius = contactContainerView.frame.size.width/2
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     
@@ -36,9 +35,8 @@ class EPContactCell: UITableViewCell {
         let randomValue = (indexpath.row + indexpath.section) % colorArray.count
         
         contactInitialLabel.backgroundColor = colorArray[randomValue]
-        
     }
- 
+    
     func updateContactsinUI(contact : EPContact, indexPath: NSIndexPath, subtitleType : SubtitleCellValue){
         //Update all UI in the cell here
         self.contactTextLabel?.text = contact.displayName()
@@ -51,43 +49,40 @@ class EPContactCell: UITableViewCell {
             self.contactImageView.hidden = false
             self.contactInitialLabel.hidden = true
         }
-        else{
+        else {
             self.contactInitialLabel.text = contact.contactInitials()
             updateInitialsColorForIndexPath(indexPath)
             self.contactImageView.hidden = true
             self.contactInitialLabel.hidden = false
         }
-
     }
     
     func updateSubtitleBasedonType (subtitleType : SubtitleCellValue , contact : EPContact) {
         
         switch subtitleType{
-        case SubtitleCellValue.Phonenumer :
-                let phoneNumberCount = contact.phoneNumbers.count
-                
-                if phoneNumberCount == 1  {
-                    self.contactDetailTextLabel.text = "\(contact.phoneNumbers[0].phoneNumber)"
-                }
-                else if phoneNumberCount > 1
-                {
-                    self.contactDetailTextLabel.text = "\(contact.phoneNumbers[0].phoneNumber) and \(contact.phoneNumbers.count-1) more"
-                }
-                else{
-                    self.contactDetailTextLabel.text = EPGlobalConstants.Strings.phoneNumberNotAvaialable
-                }
-                break
+        case SubtitleCellValue.Phonenumber :
+            let phoneNumberCount = contact.phoneNumbers.count
+            
+            if phoneNumberCount == 1  {
+                self.contactDetailTextLabel.text = "\(contact.phoneNumbers[0].phoneNumber)"
+            }
+            else if phoneNumberCount > 1 {
+                self.contactDetailTextLabel.text = "\(contact.phoneNumbers[0].phoneNumber) and \(contact.phoneNumbers.count-1) more"
+            }
+            else {
+                self.contactDetailTextLabel.text = EPGlobalConstants.Strings.phoneNumberNotAvaialable
+            }
+            break
         case SubtitleCellValue.Email :
             let emailCount = contact.emails.count
-        
-            if emailCount == 1  {
+            
+            if emailCount == 1 {
                 self.contactDetailTextLabel.text = "\(contact.emails[0].email)"
             }
-            else if emailCount > 1
-            {
+            else if emailCount > 1 {
                 self.contactDetailTextLabel.text = "\(contact.emails[0].email) and \(contact.emails.count-1) more"
             }
-            else{
+            else {
                 self.contactDetailTextLabel.text = EPGlobalConstants.Strings.emailNotAvaialable
             }
             break
@@ -97,7 +92,7 @@ class EPContactCell: UITableViewCell {
         case SubtitleCellValue.Organization :
             self.contactDetailTextLabel.text = contact.company! as String
             break
-
+            
         }
     }
 }
